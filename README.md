@@ -1,6 +1,6 @@
 # the SIT’s Elective Courses Registration (SIT-ECR)
 
-The SIT's Elective Courses Registration System for senior and junior students.
+The SIT's Elective Courses Registration System for Senior and Junior Students.
 ระบบลงทะเบียนวิชาเลือกสำหรับนักศึกษาชั้นปีที่ 3 และ 4
 
 ## Quick Start
