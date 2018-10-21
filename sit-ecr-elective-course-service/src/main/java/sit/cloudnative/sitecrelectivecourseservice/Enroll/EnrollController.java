@@ -11,23 +11,23 @@ import java.util.List;
 @RestController
 public class EnrollController {
     @Autowired
-    private EnrollService EnrollService;
+    private EnrollService enrollService;
 
     @PostMapping("/enroll/")
     public ResponseEntity<Enroll> post(@RequestBody Enroll newEnroll) {
-        Enroll enroll = EnrollService.createEnroll(newEnroll);
+        Enroll enroll = enrollService.createEnroll(newEnroll);
         return new ResponseEntity<>(enroll, HttpStatus.OK);
     }
 
     @GetMapping("/enroll/{id}")
     public ResponseEntity<Enroll> findByID(@PathVariable Integer id) {
-        Enroll enroll = EnrollService.findEnrollByID(id);
+        Enroll enroll = enrollService.findEnrollByID(id);
         return new ResponseEntity<>(enroll, HttpStatus.OK);
     }
 
     @GetMapping("/enrolls")
     public ResponseEntity<List> findAll() {
-        List enrolls = EnrollService.findAllEnroll();
+        List enrolls = enrollService.findAllEnroll();
         return new ResponseEntity<>(enrolls, HttpStatus.OK);
     }
 
