@@ -1,0 +1,647 @@
+{
+	"info": {
+		"_postman_id": "2e0321c5-2634-4c24-9af0-2feb531b9d03",
+		"name": "SIT-ECR Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ElectiveCourse",
+			"item": [
+				{
+					"name": "GET List of ElectiveCourse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4498cb51-0d94-4f17-91ff-537818d87da8",
+								"exec": [
+									"",
+									"pm.test(\"Returning a valid response.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is JSON.\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid.\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.a('array')",
+									"}) ",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{elective_course_url}}/elective-courses/",
+							"host": [
+								"{{elective_course_url}}"
+							],
+							"path": [
+								"elective-courses",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ElectiveCourse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1d01419b-ddba-4349-8f14-d7c3946a3bb7",
+								"exec": [
+									"pm.test(\"Returning a valid response\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid\", function () {",
+									"    const keysData = Object.keys(pm.response.json())",
+									"    expectedData = [\"id\", \"courseCode\", \"courseName\", \"lecturer\", \"maxEnrolls\", \"enrolls\"]",
+									"    pm.expect(keysData).to.eql(expectedData)",
+									"}) ",
+									"",
+									"pm.test(\"Enrolls in Course is an array.\", function () {",
+									"    const jsonData = pm.response.json()",
+									"    pm.expect(jsonData['enrolls']).to.be.a('array')",
+									"}) ",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{elective_course_url}}/elective-course/1/",
+							"host": [
+								"{{elective_course_url}}"
+							],
+							"path": [
+								"elective-course",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE ElectiveCourse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a65e7b2d-59ce-439e-93f4-159c35058d8f",
+								"exec": [
+									"pm.test(\"Returning a valid response\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid\", function () {",
+									"    const keysData = Object.keys(pm.response.json())",
+									"    const expectedData = [\"id\", \"courseCode\", \"courseName\", \"lecturer\", \"maxEnrolls\", \"enrolls\"]",
+									"    pm.expect(keysData).to.eql(expectedData)",
+									"}) ",
+									"",
+									"pm.test(\"Enrolls in Course is null.\", function () {",
+									"    const jsonData = pm.response.json()",
+									"    pm.expect(jsonData['enrolls']).to.be.a('null')",
+									"}) ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"courseCode\": \"INT492\",\n\t\"courseName\": \"Big Data\",\n\t\"lecturer\": \"-\",\n\t\"maxEnrolls\": 30\n}"
+						},
+						"url": {
+							"raw": "{{elective_course_url}}/elective-course/",
+							"host": [
+								"{{elective_course_url}}"
+							],
+							"path": [
+								"elective-course",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Enroll",
+			"item": [
+				{
+					"name": "GET List of Enrolls",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "205f5246-020c-4f7b-9dcc-0a24062d2724",
+								"exec": [
+									"",
+									"pm.test(\"Returning a valid response.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is JSON.\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid.\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.a('array')",
+									"}) ",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{elective_course_url}}/enrolls/",
+							"host": [
+								"{{elective_course_url}}"
+							],
+							"path": [
+								"enrolls",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET List of Enrolls by User ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1946624d-5aca-4b01-b900-63d52a987c02",
+								"exec": [
+									"",
+									"pm.test(\"Returning a valid response.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is JSON.\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid.\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.a('array')",
+									"}) ",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{elective_course_url}}/enrolls/user-id/2",
+							"host": [
+								"{{elective_course_url}}"
+							],
+							"path": [
+								"enrolls",
+								"user-id",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Enroll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "020b3130-0742-4e1d-98f8-7fa168226d27",
+								"exec": [
+									"pm.test(\"Returning a valid response\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid\", function () {",
+									"    const keysData = Object.keys(pm.response.json())",
+									"    expectedData = [\"id\", \"courseId\", \"userId\", \"created\"]",
+									"    pm.expect(keysData).to.eql(expectedData)",
+									"}) ",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{elective_course_url}}/enroll/7/",
+							"host": [
+								"{{elective_course_url}}"
+							],
+							"path": [
+								"enroll",
+								"7",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE Enroll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "76c31659-8d6e-41f4-8ac7-05b8a16bc220",
+								"exec": [
+									"pm.test(\"Returning a valid response\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid\", function () {",
+									"    const keysData = Object.keys(pm.response.json())",
+									"    const expectedData = [\"id\", \"courseId\", \"userId\", \"created\"]",
+									"    pm.expect(keysData).to.eql(expectedData)",
+									"}) ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"courseId\": 2,\n\t\"userId\": 22\n}"
+						},
+						"url": {
+							"raw": "{{elective_course_url}}/enroll/",
+							"host": [
+								"{{elective_course_url}}"
+							],
+							"path": [
+								"enroll",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d17f1c14-5731-4274-9684-0cbb9403ec88",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4a5c9602-f1d6-47af-98a3-d761c676ca32",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GET Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "acd72587-a41b-4441-9611-0096ddc19f35",
+								"exec": [
+									"",
+									"pm.test(\"Returning a valid response.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is JSON.\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid.\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.a('array')",
+									"}) ",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{account_url}}/users/",
+							"host": [
+								"{{account_url}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "62b3e500-4929-49ac-9288-0a1cf9d34cd5",
+								"exec": [
+									"pm.test(\"Returning a valid response\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid\", function () {",
+									"    const keysData = Object.keys(pm.response.json())",
+									"    expectedData = [\"id\", \"studentId\", \"name\", \"surname\", \"department\", \"faculty\", \"year\", \"created\"]",
+									"    pm.expect(keysData).to.eql(expectedData)",
+									"}) ",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"studentId\": \"58130500001\",\n\t\"name\": \"Kanisorn\",\n\t\"surname\": \"Sutham\",\n\t\"department\": \"IT\",\n\t\"faculty\": \"IT\",\n\t\"year\": 4\n}"
+						},
+						"url": {
+							"raw": "{{account_url}}/user/",
+							"host": [
+								"{{account_url}}"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9f052b72-2d3f-4a74-9276-cda668ac6b16",
+								"exec": [
+									"pm.test(\"Returning a valid response\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid\", function () {",
+									"    const keysData = Object.keys(pm.response.json())",
+									"    expectedData = [\"id\", \"studentId\", \"name\", \"surname\", \"department\", \"faculty\", \"year\", \"created\"]",
+									"    pm.expect(keysData).to.eql(expectedData)",
+									"}) ",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{account_url}}/user/1/",
+							"host": [
+								"{{account_url}}"
+							],
+							"path": [
+								"user",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7a0238cf-d86e-469d-9991-6b35c8a27008",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a191c3cb-08ac-4ede-adda-ee9aa134177b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "7fb930aa-9126-4c2b-ba67-d46c0c51b21e",
+			"key": "elective_course_url",
+			"value": "http://localhost:8090",
+			"type": "string"
+		},
+		{
+			"id": "4679dbfc-f6ec-4fb4-b4ca-4d85615bcd03",
+			"key": "account_url",
+			"value": "http://localhost:8091",
+			"type": "string"
+		}
+	]
+}

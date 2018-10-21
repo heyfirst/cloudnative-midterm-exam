@@ -1,0 +1,12 @@
+{
+  "name": "postman",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "newman": "^4.1.0"
+  },
+  "scripts": {
+    "newman": "node newman.js"
+  }
+}
