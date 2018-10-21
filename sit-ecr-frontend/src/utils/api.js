@@ -1,23 +1,21 @@
-import axios from "axios";
-import store from "./store";
+import axios from 'axios'
+// import store from './store'
 
 const createApiInstance = () =>
   axios.create({
-    baseURL: "http://localhost:3001",
+    baseURL: 'http://localhost:8090',
     timeout: 15000,
     headers: {
-      Authorization: store.getAccessToken()
-        ? `JWT ${store.getAccessToken()}`
-        : "",
-      "Content-Type": "application/json"
+      // Authorization: store.getAccessToken() ? `JWT ${store.getAccessToken()}` : '',
+      'Content-Type': 'application/json'
     }
-  });
+  })
 
 const handleResponse = response => {
-  return Promise.resolve(response);
-};
+  return Promise.resolve(response)
+}
 
-const catchError = e => Promise.reject(e.response);
+const catchError = e => Promise.reject(e.response)
 
 export default {
   get: path =>
@@ -29,7 +27,7 @@ export default {
     createApiInstance()
       .request({
         url: path,
-        method: "POST",
+        method: 'POST',
         headers,
         data: body
       })
@@ -39,7 +37,7 @@ export default {
     createApiInstance()
       .request({
         url: path,
-        method: "PATCH",
+        method: 'PATCH',
         data: body
       })
       .then(handleResponse)
@@ -49,4 +47,4 @@ export default {
       .delete(path)
       .then(handleResponse)
       .catch(catchError)
-};
+}
