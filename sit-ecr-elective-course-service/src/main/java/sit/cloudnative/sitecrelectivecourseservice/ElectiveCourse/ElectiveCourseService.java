@@ -21,7 +21,6 @@ public class ElectiveCourseService {
             ElectiveCourse electiveCourse = (ElectiveCourse) electiveCourses.get(i);
             List enrolls = enrollService.findEnrollsByElectiveCourseId(electiveCourse.getId());
             electiveCourse.setEnrolls(enrolls);
-            System.out.println(electiveCourse.getEnrolls());
         }
         return electiveCourses;
     }
@@ -29,6 +28,8 @@ public class ElectiveCourseService {
     public ElectiveCourse findElectiveCourseByID(Integer id) {
         ElectiveCourse electiveCourse = electiveCourseRepository.findById(id)
                                     .orElseThrow(() -> new RuntimeException());
+        List enrolls = enrollService.findEnrollsByElectiveCourseId(electiveCourse.getId());
+        electiveCourse.setEnrolls(enrolls);
         return electiveCourse;
     }
 
