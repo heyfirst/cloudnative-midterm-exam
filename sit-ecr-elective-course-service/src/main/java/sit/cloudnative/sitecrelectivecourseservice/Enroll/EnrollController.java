@@ -27,7 +27,7 @@ public class EnrollController {
         }
 
         Enroll enroll = enrollService.createEnroll(newEnroll);
-        return new ResponseEntity<>(enroll, HttpStatus.OK);
+        return new ResponseEntity<>(enroll, HttpStatus.CREATED);
 
     }
 

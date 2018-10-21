@@ -21,7 +21,7 @@ public class ElectiveCourseController {
     @PostMapping("/elective-course/")
     public ResponseEntity<ElectiveCourse> post(@RequestBody ElectiveCourse newElectiveCourse) {
         ElectiveCourse ElectiveCourse = electiveCourseService.createElectiveCourse(newElectiveCourse);
-        return new ResponseEntity<>(ElectiveCourse, HttpStatus.OK);
+        return new ResponseEntity<>(ElectiveCourse, HttpStatus.CREATED);
     }
 
     @GetMapping("/elective-course/{id}")
