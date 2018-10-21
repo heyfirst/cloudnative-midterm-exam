@@ -14,7 +14,7 @@ public class Enroll {
 
     private Integer courseId;
 
-    private Integer studentId;
+    private Integer userId;
 
     @Column
     @CreationTimestamp
@@ -23,9 +23,9 @@ public class Enroll {
     public Enroll() {
     }
 
-    public Enroll(Integer courseId, Integer studentId, LocalDateTime created) {
+    public Enroll(Integer courseId, Integer userId, LocalDateTime created) {
         this.courseId = courseId;
-        this.studentId = studentId;
+        this.userId = userId;
         this.created = created;
     }
 
@@ -45,12 +45,12 @@ public class Enroll {
         this.courseId = courseId;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public LocalDateTime getCreated() {
