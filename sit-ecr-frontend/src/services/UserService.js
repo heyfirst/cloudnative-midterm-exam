@@ -1,9 +1,9 @@
 import api from '../utils/api'
 
-const EnrollService = {
+const UserService = {
   getUserFromUserID: studentId => {
-    return api.get(`http://localhost:8090/enroll/student-id/${studentId}`)
+    return api.get(`http://localhost:8091/user/student-id/${studentId}`)
   }
 }
 
-export default EnrollService
+export default UserService
