@@ -26,4 +26,11 @@ public class EnrollService {
         Enroll enroll = enrollRepository.save(newRegister);
         return enroll;
     }
+
+    public List findEnrollsByElectiveCourseId(Integer id) {
+        List enrolls = enrollRepository.findByCourseId(id);
+        return enrolls;
+    }
+
+
 }
