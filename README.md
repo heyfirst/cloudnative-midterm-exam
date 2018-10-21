@@ -3,7 +3,8 @@
 The SIT's Elective Courses Registration System for Senior and Junior Students.
 ระบบลงทะเบียนวิชาเลือกสำหรับนักศึกษาชั้นปีที่ 3 และ 4
 
-## Quick Start
+## Starting!
+เริ่มจากรันตัวของ Service ทั้งหมดก่อน.
 
 ## Philosophy
 
