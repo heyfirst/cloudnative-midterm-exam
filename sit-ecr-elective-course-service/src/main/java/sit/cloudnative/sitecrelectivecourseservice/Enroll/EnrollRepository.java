@@ -8,5 +8,6 @@ import java.util.List;
 @Repository
 public interface EnrollRepository extends JpaRepository<Enroll, Integer> {
     List<Enroll> findByCourseId(Integer id);
+    List<Enroll> findByUserId(Integer id);
 }
 
