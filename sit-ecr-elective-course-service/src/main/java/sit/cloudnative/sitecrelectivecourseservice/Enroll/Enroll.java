@@ -1,6 +1,10 @@
 package sit.cloudnative.sitecrelectivecourseservice.Enroll;
 
+import org.hibernate.annotations.CreationTimestamp;
+import sit.cloudnative.sitecrelectivecourseservice.ElectiveCourse.ElectiveCourse;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -14,15 +18,14 @@ public class Enroll {
 
     private Integer studentId;
 
-    @Basic(optional = false)
-    @Column(name = "created", insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
+    @Column
+    @CreationTimestamp
+    private LocalDateTime created;
 
     public Enroll() {
     }
 
-    public Enroll(Integer courseId, Integer studentId, Date created) {
+    public Enroll(Integer courseId, Integer studentId, LocalDateTime created) {
         this.courseId = courseId;
         this.studentId = studentId;
         this.created = created;
@@ -52,11 +55,11 @@ public class Enroll {
         this.studentId = studentId;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 }
