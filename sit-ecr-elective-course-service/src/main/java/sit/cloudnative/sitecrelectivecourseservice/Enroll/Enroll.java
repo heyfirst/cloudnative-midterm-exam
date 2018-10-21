@@ -1,11 +1,9 @@
 package sit.cloudnative.sitecrelectivecourseservice.Enroll;
 
 import org.hibernate.annotations.CreationTimestamp;
-import sit.cloudnative.sitecrelectivecourseservice.ElectiveCourse.ElectiveCourse;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "enrolls")
