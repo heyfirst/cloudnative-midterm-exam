@@ -1,6 +1,7 @@
 import React from 'react'
 import { Icon } from 'antd'
 import styled from 'styled-components'
+import ElectiveCourseService from '../../services/ElectiveCourseService'
 
 const Table = styled.table`
   .w-5 {
@@ -11,6 +12,24 @@ const Table = styled.table`
   }
 `
 class EnrollTable extends React.Component {
+  state = {
+    courses: []
+  }
+
+  async componentDidMount() {
+    const data = await ElectiveCourseService.getAllElectiveCourses().then(resp => resp.data)
+    this.setState({
+      courses: data
+    })
+  }
+
+  checkCourseAvailable = (enrolls, maxEnrolls) => {
+    if (enrolls < maxEnrolls) {
+      return true
+    }
+    return false
+  }
+
   render() {
     return (
       <div className="table-responsive">
@@ -31,58 +50,33 @@ class EnrollTable extends React.Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td scope="col">
-                <button className="btn btn-danger btn-block" disabled>
-                  MAX
-                </button>
-              </td>
-              <td scope="col">INT491</td>
-              <td scope="col">ABC</td>
-              <td scope="col">-</td>
-              <td scope="col">
-                30/30 <span className="badge float-right badge-danger">Max</span>
-              </td>
-            </tr>
-            <tr>
-              <td scope="col">
-                <button className="btn btn-success btn-block d-flex align-items-center">
-                  <Icon type="check-circle" theme="outlined" className="mr-1" />
-                  ENROLLED
-                </button>
-              </td>
-              <td scope="col">INT491</td>
-              <td scope="col">ABC</td>
-              <td scope="col">-</td>
-              <td scope="col">
-                9/30 <span className="badge float-right badge-success">Available</span>
-              </td>
-            </tr>
-            <tr>
-              <td scope="col">
-                <button className="btn btn-secondary btn-block">CHOOSE</button>
-              </td>
-              <td scope="col">INT491</td>
-              <td scope="col">ABC</td>
-              <td scope="col">-</td>
-              <td scope="col">
-                11/30 <span className="badge float-right badge-success">Available</span>
-              </td>
-            </tr>
-            <tr>
-              <td scope="col">
-                <button className="btn btn-primary btn-block d-flex align-items-center">
-                  <Icon type="check" theme="outlined" className="mr-1" />
-                  CHOOSED
-                </button>
-              </td>
-              <td scope="col">INT491</td>
-              <td scope="col">ABC</td>
-              <td scope="col">-</td>
-              <td scope="col">
-                11/30 <span className="badge float-right badge-success">Available</span>
-              </td>
-            </tr>
+            {this.state.courses.map((course, index) => (
+              <tr key={index}>
+                <td scope="col">
+                  <button className="btn btn-primary btn-block d-flex align-items-center">
+                    <Icon type="check" theme="outlined" className="mr-1" />
+                    CHOOSE
+                  </button>
+                </td>
+                <td scope="col">{course.courseCode}</td>
+                <td scope="col">{course.courseName}</td>
+                <td scope="col">{course.lecturer}</td>
+                <td scope="col">
+                  {course.enrolls.length}/{course.maxEnrolls}{' '}
+                  <span
+                    className={`badge float-right ${
+                      this.checkCourseAvailable(course.enrolls.length, course.maxEnrolls)
+                        ? 'badge-success'
+                        : 'badge-danger'
+                    }`}
+                  >
+                    {this.checkCourseAvailable(course.enrolls.length, course.maxEnrolls)
+                      ? 'Available'
+                      : 'Max'}
+                  </span>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>

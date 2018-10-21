@@ -50,7 +50,7 @@ class CourseTable extends React.Component {
           </thead>
           <tbody>
             {this.state.courses.map((course, index) => (
-              <tr>
+              <tr key={index}>
                 <td scope="col">{index + 1}.</td>
                 <td scope="col">{course.courseCode}</td>
                 <td scope="col">{course.courseName}</td>

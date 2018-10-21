@@ -30,6 +30,13 @@ class Portal extends React.Component {
               </div>
             </div>
           </section>
+          <section id="login" className="mb-3">
+            <div className="row">
+              <div className="col-12">
+                <LoginCard />
+              </div>
+            </div>
+          </section>
           <section id="enroll" className="mb-3">
             <div className="row">
               <div className="col-12">
