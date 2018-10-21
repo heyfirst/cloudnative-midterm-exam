@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import ElectiveCourseService from '../../services/ElectiveCourseService'
 
 const Table = styled.table`
   .w-5 {
@@ -10,6 +11,24 @@ const Table = styled.table`
   }
 `
 class CourseTable extends React.Component {
+  state = {
+    courses: []
+  }
+
+  async componentDidMount() {
+    const data = await ElectiveCourseService.getAllElectiveCourses().then(resp => resp.data)
+    this.setState({
+      courses: data
+    })
+  }
+
+  checkCourseAvailable = (enrolls, maxEnrolls) => {
+    if (enrolls < maxEnrolls) {
+      return true
+    }
+    return false
+  }
+
   render() {
     return (
       <div className="table-responsive">
@@ -30,33 +49,28 @@ class CourseTable extends React.Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td scope="col">1.</td>
-              <td scope="col">INT491</td>
-              <td scope="col">ABC</td>
-              <td scope="col">-</td>
-              <td scope="col">
-                30/30 <span className="badge float-right badge-danger">Max</span>
-              </td>
-            </tr>
-            <tr>
-              <td scope="col">2.</td>
-              <td scope="col">INT491</td>
-              <td scope="col">ABC</td>
-              <td scope="col">-</td>
-              <td scope="col">
-                9/30 <span className="badge float-right badge-success">Available</span>
-              </td>
-            </tr>
-            <tr>
-              <td scope="col">3.</td>
-              <td scope="col">INT491</td>
-              <td scope="col">ABC</td>
-              <td scope="col">-</td>
-              <td scope="col">
-                11/30 <span className="badge float-right badge-success">Available</span>
-              </td>
-            </tr>
+            {this.state.courses.map((course, index) => (
+              <tr>
+                <td scope="col">{index + 1}.</td>
+                <td scope="col">{course.courseCode}</td>
+                <td scope="col">{course.courseName}</td>
+                <td scope="col">{course.lecturer}</td>
+                <td scope="col">
+                  {course.enrolls.length}/{course.maxEnrolls}{' '}
+                  <span
+                    className={`badge float-right ${
+                      this.checkCourseAvailable(course.enrolls.length, course.maxEnrolls)
+                        ? 'badge-success'
+                        : 'badge-danger'
+                    }`}
+                  >
+                    {this.checkCourseAvailable(course.enrolls.length, course.maxEnrolls)
+                      ? 'Available'
+                      : 'Max'}
+                  </span>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>
