@@ -492,6 +492,115 @@
 					"response": []
 				},
 				{
+					"name": "GET User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9f052b72-2d3f-4a74-9276-cda668ac6b16",
+								"exec": [
+									"pm.test(\"Returning a valid response\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid\", function () {",
+									"    const keysData = Object.keys(pm.response.json())",
+									"    expectedData = [\"id\", \"studentId\", \"name\", \"surname\", \"department\", \"faculty\", \"year\", \"created\"]",
+									"    pm.expect(keysData).to.eql(expectedData)",
+									"}) ",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{account_url}}/user/1/",
+							"host": [
+								"{{account_url}}"
+							],
+							"path": [
+								"user",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by StudentID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b0d3a827-4e36-4d4c-9686-220b35c1e675",
+								"exec": [
+									"pm.test(\"Returning a valid response\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Content-Type is json\", function () {",
+									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
+									"    var expectContentType = \"application/json;charset=UTF-8\"",
+									"    pm.expect(contentType).to.eql(expectContentType)",
+									"});",
+									"",
+									"",
+									"pm.test(\"ResponseBody is valid\", function () {",
+									"    const keysData = Object.keys(pm.response.json())",
+									"    expectedData = [\"id\", \"studentId\", \"name\", \"surname\", \"department\", \"faculty\", \"year\", \"created\"]",
+									"    pm.expect(keysData).to.eql(expectedData)",
+									"}) ",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{account_url}}/user/student-id/58130500009/",
+							"host": [
+								"{{account_url}}"
+							],
+							"path": [
+								"user",
+								"student-id",
+								"58130500009",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "CREATE User",
 					"event": [
 						{
@@ -550,60 +659,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "GET User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "9f052b72-2d3f-4a74-9276-cda668ac6b16",
-								"exec": [
-									"pm.test(\"Returning a valid response\", function () {",
-									"    pm.response.to.have.status(200);",
-									"    pm.response.to.be.withBody;",
-									"    pm.response.to.be.json;",
-									"});",
-									"",
-									"pm.test(\"Content-Type is json\", function () {",
-									"    var contentType = postman.getResponseHeader(\"Content-Type\")",
-									"    var expectContentType = \"application/json;charset=UTF-8\"",
-									"    pm.expect(contentType).to.eql(expectContentType)",
-									"});",
-									"",
-									"",
-									"pm.test(\"ResponseBody is valid\", function () {",
-									"    const keysData = Object.keys(pm.response.json())",
-									"    expectedData = [\"id\", \"studentId\", \"name\", \"surname\", \"department\", \"faculty\", \"year\", \"created\"]",
-									"    pm.expect(keysData).to.eql(expectedData)",
-									"}) ",
-									"",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{account_url}}/user/1/",
-							"host": [
-								"{{account_url}}"
-							],
-							"path": [
-								"user",
-								"1",
-								""
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		}
@@ -632,13 +687,13 @@
 	],
 	"variable": [
 		{
-			"id": "7fb930aa-9126-4c2b-ba67-d46c0c51b21e",
+			"id": "55535bb9-b280-43b3-ac1b-7d9e3bfa1391",
 			"key": "elective_course_url",
 			"value": "http://localhost:8090",
 			"type": "string"
 		},
 		{
-			"id": "4679dbfc-f6ec-4fb4-b4ca-4d85615bcd03",
+			"id": "ab1d33eb-5e5c-48d9-ad21-710247fa8629",
 			"key": "account_url",
 			"value": "http://localhost:8091",
 			"type": "string"

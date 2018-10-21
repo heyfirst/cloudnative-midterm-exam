@@ -26,6 +26,12 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    @GetMapping("/user/student-id/{id}")
+    public ResponseEntity<User> findByStudentID(@PathVariable String id) {
+        User user = userService.findUserByStudentID(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
     @GetMapping("/users")
     public ResponseEntity<List> findAll() {
         List users = userService.findAllUser();

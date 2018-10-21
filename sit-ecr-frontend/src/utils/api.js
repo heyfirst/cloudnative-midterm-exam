@@ -3,7 +3,6 @@ import axios from 'axios'
 
 const createApiInstance = () =>
   axios.create({
-    baseURL: 'http://localhost:8090',
     timeout: 15000,
     headers: {
       // Authorization: store.getAccessToken() ? `JWT ${store.getAccessToken()}` : '',

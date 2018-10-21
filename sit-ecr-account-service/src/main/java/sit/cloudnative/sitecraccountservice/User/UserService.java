@@ -22,6 +22,11 @@ public class UserService {
         return user;
     }
 
+    public User findUserByStudentID(String id) {
+        User user = userRepository.findByStudentId(id);
+        return user;
+    }
+
     public User createUser(User newRegister) {
         User user = userRepository.save(newRegister);
         return user;
