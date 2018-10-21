@@ -1,7 +1,10 @@
 package sit.cloudnative.sitecrelectivecourseservice.ElectiveCourse;
 
+import sit.cloudnative.sitecrelectivecourseservice.Enroll.Enroll;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -19,6 +22,9 @@ public class ElectiveCourse implements Serializable {
 
     private Integer maxEnrolls;
 
+    @Transient
+    private List<Enroll> enrolls;
+
     public ElectiveCourse() {
     }
 
@@ -27,6 +33,14 @@ public class ElectiveCourse implements Serializable {
         this.courseName = courseName;
         this.lecturer = lecturer;
         this.maxEnrolls = maxEnrolls;
+    }
+
+    public ElectiveCourse(String courseCode, String courseName, String lecturer, Integer maxEnrolls, List<Enroll> enrolls) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.lecturer = lecturer;
+        this.maxEnrolls = maxEnrolls;
+        this.enrolls = enrolls;
     }
 
     public Integer getId() {
@@ -67,5 +81,14 @@ public class ElectiveCourse implements Serializable {
 
     public void setMaxEnrolls(Integer maxEnrolls) {
         this.maxEnrolls = maxEnrolls;
+    }
+
+
+    public List<Enroll> getEnrolls() {
+        return enrolls;
+    }
+
+    public void setEnrolls(List<Enroll> enrolls) {
+        this.enrolls = enrolls;
     }
 }
